@@ -15,7 +15,7 @@ interface UserAttributes {
 export interface UserInput extends Optional<UserAttributes, 'id'>{ }
 export interface UserOutput extends Required<UserAttributes>{ }
 
-class User extends Model<UserAttributes, UserInput> implements UserAttributes {
+class user extends Model<UserAttributes, UserInput> implements UserAttributes {
     public id!: number;
     public name!: string;
     public email!: string;
@@ -29,7 +29,7 @@ class User extends Model<UserAttributes, UserInput> implements UserAttributes {
 }
 
 
-User.init({
+user.init({
     id: {
         type: DataTypes.BIGINT,
         primaryKey: true,
@@ -62,4 +62,4 @@ User.init({
     underscored: false
 });
 
-export default User;
+export default user;
