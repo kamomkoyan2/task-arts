@@ -16,18 +16,21 @@ module.exports = {
         type: Sequelize.STRING,
       },
       userId: {
-        type: Sequelize.BIGINT,
-      },
-      image: {
-        type: Sequelize.STRING,
-      },
-      phoneNumber: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
+        allowNull: true,
+        foreignKey: true,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },
+
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -35,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('user_accounts');
+    await queryInterface.dropTable('articles');
   },
 };
