@@ -10,16 +10,17 @@ const authenticated = (req: Request, res: Response, next: NextFunction) => {
     if (token === null) {
       return res
         .status(401)
-        .send(helpers.ResponseData(401, 'Unautorized', null, null));
+        .send(helpers.ResponseData(401, 'Unauthorized', null, null));
     }
     const result = helpers.extractToken(token!);
     if (!result) {
       return res
         .status(401)
-        .send(helpers.ResponseData(401, 'Unautorized', null, null));
+        .send(helpers.ResponseData(401, 'Unauthorized', null, null));
     }
 
     res.locals.userEmail = result?.email;
+
     next();
   } catch (error: any) {
     return res.status(500).send(helpers.ResponseData(500, '', error, null));

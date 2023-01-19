@@ -16,15 +16,13 @@ module.exports = {
         type: Sequelize.STRING,
       },
       userId: {
-        type: Sequelize.UUID,
+        type: Sequelize.BIGINT,
         allowNull: true,
         foreignKey: true,
         references: {
           model: 'users',
           key: 'id',
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
       },
       createdAt: {
         allowNull: false,

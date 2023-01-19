@@ -4,13 +4,14 @@ import cors from 'cors';
 
 import * as dotenv from 'dotenv';
 dotenv.config();
+
 import sequelize from './db/database';
 import router from './routes/routes';
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(cors({ origin: process.env.APP_URL }));
 
 const PORT = process.env.APP_PORT || 4000;
 
@@ -18,7 +19,7 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-app.use(router);
+app.use('/api/v1', router);
 
 sequelize
   .authenticate()

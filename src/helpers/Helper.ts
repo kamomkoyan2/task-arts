@@ -11,7 +11,7 @@ interface UserData {
 }
 
 const generateToken = (data: any): string => {
-  return jwt.sign(data, process.env.JWT_TOKEN as string, { expiresIn: '10m' });
+  return jwt.sign(data, process.env.JWT_TOKEN as string, { expiresIn: '1h' });
 };
 
 const generateRefreshToken = (data: any): string => {

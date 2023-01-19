@@ -20,6 +20,7 @@ module.exports = {
       },
       verified: {
         type: Sequelize.BOOLEAN,
+        default: false,
       },
       active: {
         type: Sequelize.BOOLEAN,

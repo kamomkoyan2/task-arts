@@ -17,10 +17,13 @@ const verifyEmail = async (req: Request, res: Response): Promise<Response> => {
     const user = await User.findOne({ email: decoded.email });
 
     if (!user) {
-      throw new Error();
+      return res
+        .status(401)
+        .send(helpers.ResponseData(200, 'Invalid!', null, ''));
     }
 
     user.verified = true;
+    user.active = true;
     await user.save();
     return res
       .status(200)

@@ -1,16 +1,4 @@
-import {
-  DataTypes,
-  HasManyRemoveAssociationMixin,
-  HasManyRemoveAssociationsMixin,
-  Model,
-  ModelDefined,
-  Optional,
-  Sequelize,
-  InferAttributes,
-  CreationOptional,
-  NonAttribute,
-  ForeignKey,
-} from 'sequelize';
+import { DataTypes, Model, Optional, ForeignKey } from 'sequelize';
 import sequelize from '../database';
 import User from './User';
 interface ArticleAttributes {
@@ -53,8 +41,11 @@ Article.init(
       type: DataTypes.TEXT,
     },
     userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      type: DataTypes.BIGINT,
+      references: {
+        model: User,
+        key: 'userId',
+      },
     },
   },
   {
