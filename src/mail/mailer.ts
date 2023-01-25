@@ -16,7 +16,7 @@ const sendVerificationMail = async (to: string, token: string) => {
     from: 'youremail@gmail.com',
     to,
     subject: 'Verify your email address',
-    html: `Please click the link to verify your email: <a href="http://localhost:3000/verify-email?token=${token}">Verify email</a>`,
+    html: `Please click the link to verify your email: <a href="http://localhost:3000/api/v1/auth/verify-email?token=${token}">Verify email</a>`,
   };
 
   try {

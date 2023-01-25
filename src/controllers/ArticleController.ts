@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import Article from '../db/models/Article';
 import helpers from '../helpers/Helper';
 import isAuth from '../helpers/authUser';
-
+import { paginate } from '../helpers/pagination';
 const createArticle = async (
   req: Request,
   res: Response
@@ -26,14 +26,25 @@ const createArticle = async (
   }
 };
 
+
+
 const getAllArticles = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
   try {
-    const articles = await Article.findAll();
-    console.log(articles);
-    return res.status(200).send(helpers.ResponseData(200, '', null, articles));
+    const options = {
+      page: req.query.page,
+      pageSize: req.query.pageSize,
+      sortBy: req.query.sortBy,
+      sortDirection: req.query.sortDirection,
+      filter: req.query.filter,
+      search: req.query.search
+    };
+    // @ts-ignore
+    const { count, rows } = await paginate(Article, options);
+
+    return res.status(200).send(helpers.ResponseData(200, '', null, rows));
   } catch (error) {
     return res.status(400).send(helpers.ResponseData(400, '', error, null));
   }
