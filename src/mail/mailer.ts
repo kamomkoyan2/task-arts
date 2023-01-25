@@ -4,11 +4,11 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 const sendVerificationMail = async (to: string, token: string) => {
   const transporter = nodemailer.createTransport({
-    host: 'smtp.mailtrap.io',
-    port: 2525,
+    host: process.env.MAIL_HOST,
+    port: Number(process.env.MAIL_PORT),
     auth: {
-      user: 'c4323ce21ffec2',
-      pass: 'f79bcf45fe82d3',
+      user: process.env.MAIL_AUTH_USER,
+      pass: process.env.MAIL_AUTH_PASS,
     },
   });
 
